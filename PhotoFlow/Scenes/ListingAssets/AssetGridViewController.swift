@@ -80,7 +80,7 @@ class AssetGridViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         let asset = results[indexPath.item]
-        
+
         if let cell = cell as? AssetGridCell, let representation = asset.representations.filter("rawType = 1").first {
             let representationIdentifier = representation.identifier
             cell.labelView.text = asset.name

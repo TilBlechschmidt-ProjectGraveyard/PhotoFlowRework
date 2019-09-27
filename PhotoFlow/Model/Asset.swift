@@ -19,6 +19,7 @@ class Asset: Object {
     dynamic var rawOrigin = AssetOrigin.files.rawValue
 
     dynamic var name = ""
+    dynamic var uti = ""
 
     let representations = List<Representation>()
     let tags = List<Tag>()

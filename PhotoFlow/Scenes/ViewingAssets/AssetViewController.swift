@@ -31,12 +31,22 @@ class AssetViewController: UIViewController {
     private var panGestureRecognizer: UIPanGestureRecognizer!
     private var pinchGestureRecognizer: UIPinchGestureRecognizer!
 
+    private var shareController: UIDocumentInteractionController?
+
+    private lazy var rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(exportAsset))
+
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
 
     override var prefersStatusBarHidden: Bool {
         return fullscreen
+    }
+
+    override var navigationItem: UINavigationItem {
+        let item = super.navigationItem
+        item.rightBarButtonItem = rightBarButtonItem
+        return item
     }
 
     init(document: Document, asset: Asset, data: RepresentationData) {
@@ -181,6 +191,18 @@ class AssetViewController: UIViewController {
         }
 
         recognizer.scale = 1.0
+    }
+
+    @objc func exportAsset() {
+        let url = UIApplication.documentExportCacheDirectory().appendingPathComponent("\(UUID().uuidString).jpg")
+        try! data.data.write(to: url)
+
+        // TODO Use correct UTI
+        shareController = UIDocumentInteractionController(url: url)
+        shareController?.uti = asset.uti
+        shareController?.presentOpenInMenu(from: rightBarButtonItem, animated: false)
+
+        // TODO Add delegate and remove temporary item after transfer
     }
 }
 

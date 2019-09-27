@@ -105,6 +105,7 @@ extension ImportFilesViewController: UIDocumentPickerDelegate {
                         asset.origin = .files
                         asset.identifier = UUID()
                         asset.name = url.deletingPathExtension().lastPathComponent
+                        asset.uti = url.typeIdentifier ?? "public.image"
 
                         let original = Representation()
                         original.type = .original

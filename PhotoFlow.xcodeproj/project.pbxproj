@@ -35,7 +35,34 @@
 		30B77D0F233D30100018A043 /* PanDirectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30349BF6233A41970082FC8A /* PanDirectionGestureRecognizer.swift */; };
 		30B77D11233D43CC0018A043 /* CGAffineTransform+ReadValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B77D10233D43CC0018A043 /* CGAffineTransform+ReadValues.swift */; };
 		30B77D35233E2EFA0018A043 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B77D34233E2EFA0018A043 /* Tag.swift */; };
+		30E2B00E233EB0A600EB8547 /* URL+UTI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2B00D233EB0A600EB8547 /* URL+UTI.swift */; };
+		30E2B028233EB76200EB8547 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2B027233EB76200EB8547 /* ShareViewController.swift */; };
+		30E2B02F233EB76200EB8547 /* PhotoFlow-ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 30E2B025233EB76200EB8547 /* PhotoFlow-ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		30E2B02D233EB76200EB8547 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 307A3FE02338EF5200CDEC21 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 30E2B024233EB76200EB8547;
+			remoteInfo = "PhotoFlow-ShareExtension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		30E2B033233EB76200EB8547 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				30E2B02F233EB76200EB8547 /* PhotoFlow-ShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		30349BEB233A35C80082FC8A /* RepresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentationManager.swift; sourceTree = "<group>"; };
@@ -65,6 +92,10 @@
 		30A5870B233B6A1C00EFFF50 /* UIViewController+Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Child.swift"; sourceTree = "<group>"; };
 		30B77D10233D43CC0018A043 /* CGAffineTransform+ReadValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+ReadValues.swift"; sourceTree = "<group>"; };
 		30B77D34233E2EFA0018A043 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		30E2B00D233EB0A600EB8547 /* URL+UTI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+UTI.swift"; sourceTree = "<group>"; };
+		30E2B025233EB76200EB8547 /* PhotoFlow-ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PhotoFlow-ShareExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30E2B027233EB76200EB8547 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		30E2B02C233EB76200EB8547 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +106,13 @@
 				307A400823390B8000CDEC21 /* SnapKit in Frameworks */,
 				307A400523390B5800CDEC21 /* RealmSwift in Frameworks */,
 				307A400323390B5800CDEC21 /* Realm in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30E2B022233EB76200EB8547 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				307A3FEA2338EF5200CDEC21 /* PhotoFlow */,
+				30E2B026233EB76200EB8547 /* PhotoFlow-ShareExtension */,
 				307A3FE92338EF5200CDEC21 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				307A3FE82338EF5200CDEC21 /* PhotoFlow.app */,
+				30E2B025233EB76200EB8547 /* PhotoFlow-ShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,6 +198,7 @@
 				30349BF8233A51190082FC8A /* UIView+Blur.swift */,
 				30A5870B233B6A1C00EFFF50 /* UIViewController+Child.swift */,
 				30B77D10233D43CC0018A043 /* CGAffineTransform+ReadValues.swift */,
+				30E2B00D233EB0A600EB8547 /* URL+UTI.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -218,6 +259,15 @@
 			path = DocumentViewing;
 			sourceTree = "<group>";
 		};
+		30E2B026233EB76200EB8547 /* PhotoFlow-ShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				30E2B027233EB76200EB8547 /* ShareViewController.swift */,
+				30E2B02C233EB76200EB8547 /* Info.plist */,
+			);
+			path = "PhotoFlow-ShareExtension";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -228,10 +278,12 @@
 				307A3FE42338EF5200CDEC21 /* Sources */,
 				307A3FE52338EF5200CDEC21 /* Frameworks */,
 				307A3FE62338EF5200CDEC21 /* Resources */,
+				30E2B033233EB76200EB8547 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				30E2B02E233EB76200EB8547 /* PBXTargetDependency */,
 			);
 			name = PhotoFlow;
 			packageProductDependencies = (
@@ -243,18 +295,38 @@
 			productReference = 307A3FE82338EF5200CDEC21 /* PhotoFlow.app */;
 			productType = "com.apple.product-type.application";
 		};
+		30E2B024233EB76200EB8547 /* PhotoFlow-ShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30E2B030233EB76200EB8547 /* Build configuration list for PBXNativeTarget "PhotoFlow-ShareExtension" */;
+			buildPhases = (
+				30E2B021233EB76200EB8547 /* Sources */,
+				30E2B022233EB76200EB8547 /* Frameworks */,
+				30E2B023233EB76200EB8547 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PhotoFlow-ShareExtension";
+			productName = "PhotoFlow-ShareExtension";
+			productReference = 30E2B025233EB76200EB8547 /* PhotoFlow-ShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		307A3FE02338EF5200CDEC21 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1110;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Til Blechschmidt";
 				TargetAttributes = {
 					307A3FE72338EF5200CDEC21 = {
 						CreatedOnToolsVersion = 11.0;
+					};
+					30E2B024233EB76200EB8547 = {
+						CreatedOnToolsVersion = 11.1;
 					};
 				};
 			};
@@ -276,6 +348,7 @@
 			projectRoot = "";
 			targets = (
 				307A3FE72338EF5200CDEC21 /* PhotoFlow */,
+				30E2B024233EB76200EB8547 /* PhotoFlow-ShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -288,6 +361,13 @@
 				307A400C2339569700CDEC21 /* FileIcon.png in Resources */,
 				307A3FFA2338EF5400CDEC21 /* LaunchScreen.storyboard in Resources */,
 				307A400B2339569700CDEC21 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30E2B023233EB76200EB8547 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +393,7 @@
 				307A401223395B7D00CDEC21 /* UIApplication+Directories.swift in Sources */,
 				30349BF9233A51190082FC8A /* UIView+Blur.swift in Sources */,
 				30B77D11233D43CC0018A043 /* CGAffineTransform+ReadValues.swift in Sources */,
+				30E2B00E233EB0A600EB8547 /* URL+UTI.swift in Sources */,
 				307A3FEE2338EF5200CDEC21 /* DocumentBrowserViewController.swift in Sources */,
 				30349BFB233A59DF0082FC8A /* AssetGridAnimator.swift in Sources */,
 				30A5870C233B6A1C00EFFF50 /* UIViewController+Child.swift in Sources */,
@@ -323,7 +404,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		30E2B021233EB76200EB8547 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30E2B028233EB76200EB8547 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		30E2B02E233EB76200EB8547 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 30E2B024233EB76200EB8547 /* PhotoFlow-ShareExtension */;
+			targetProxy = 30E2B02D233EB76200EB8547 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		307A3FF82338EF5400CDEC21 /* LaunchScreen.storyboard */ = {
@@ -454,6 +551,7 @@
 		307A3FFF2338EF5400CDEC21 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LQWS3ZT7UK;
@@ -472,6 +570,7 @@
 		307A40002338EF5400CDEC21 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LQWS3ZT7UK;
@@ -482,6 +581,46 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.blechschmidt.PhotoFlow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		30E2B031233EB76200EB8547 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQWS3ZT7UK;
+				INFOPLIST_FILE = "PhotoFlow-ShareExtension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "de.blechschmidt.PhotoFlow.PhotoFlow-ShareExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		30E2B032233EB76200EB8547 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LQWS3ZT7UK;
+				INFOPLIST_FILE = "PhotoFlow-ShareExtension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "de.blechschmidt.PhotoFlow.PhotoFlow-ShareExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -504,6 +643,15 @@
 			buildConfigurations = (
 				307A3FFF2338EF5400CDEC21 /* Debug */,
 				307A40002338EF5400CDEC21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30E2B030233EB76200EB8547 /* Build configuration list for PBXNativeTarget "PhotoFlow-ShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30E2B031233EB76200EB8547 /* Debug */,
+				30E2B032233EB76200EB8547 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
