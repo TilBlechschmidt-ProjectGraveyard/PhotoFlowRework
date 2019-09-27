@@ -32,14 +32,31 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     // MARK: UIDocumentBrowserViewControllerDelegate
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        let newDocumentURL: URL? = nil
-        
-        // Set the URL for the new document here. Optionally, you can present a template chooser before calling the importHandler.
-        // Make sure the importHandler is always called, even if the user cancels the creation request.
-        if newDocumentURL != nil {
-            importHandler(newDocumentURL, .move)
-        } else {
-            importHandler(nil, .none)
+        let counter = UserDefaults.standard.integer(forKey: "newCreationCounter") + 1
+        UserDefaults.standard.set(counter + 1, forKey: "newCreationCounter")
+
+        let name = "UntitledProject #\(counter)"
+        let cacheDirectory = UIApplication.documentCreationCacheDirectory()
+        let newDocumentURL = cacheDirectory.appendingPathComponent("\(name).photoflow")
+
+        UIApplication.clearCaches()
+
+        let document = Document(fileURL: newDocumentURL)
+
+        document.save(to: newDocumentURL, for: .forCreating) {
+            guard $0 else {
+                importHandler(nil, .none)
+                return
+            }
+
+            document.close {
+                guard $0 else {
+                    importHandler(nil, .none)
+                    return
+                }
+
+                importHandler(newDocumentURL, .move)
+            }
         }
     }
     
@@ -68,13 +85,10 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         // Access the document
         document.open(completionHandler: { success in
             if success {
-                // Display the content of the document:
-                let view = DocumentView(document: document, dismiss: {
-                    self.closeDocument(document)
-                })
-
-                let documentViewController = UIHostingController(rootView: view)
-                self.present(documentViewController, animated: true, completion: nil)
+                let documentViewController = DocumentViewController(document: document)
+                let navigationController = UINavigationController(rootViewController: documentViewController)
+                navigationController.modalPresentationStyle = .currentContext
+                self.present(navigationController, animated: true, completion: nil)
             } else {
                 // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
             }
