@@ -11,6 +11,7 @@ import RealmSwift
 
 enum AssetOrigin: Int {
     case files
+    case shareExtension
 }
 
 @objcMembers

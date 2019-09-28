@@ -11,58 +11,59 @@ import MobileCoreServices
 
 @objc(ShareViewController)
 class ShareViewController: UIViewController {
-//    private let activityIndicator = UIActivityIndicatorView(style: .large)
-//    private let label = UILabel()
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        label.text = "Importing photo"
-//
-//        let stackView = UIStackView(arrangedSubviews: [label, activityIndicator])
-//        stackView.axis = .vertical
-//        stackView.alignment = .center
-//        stackView.distribution = .equalCentering
-//        view.addSubview(stackView)
-//        stackView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-//    }
+    private let documentPickerVC = UIDocumentPickerViewController(documentTypes: ["de.blechschmidt.photoflowproject"], in: .open)
+
+    private var imageURLs: [URL] = []
+
+    override func viewDidLoad() {
+        documentPickerVC.delegate = self
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         DispatchQueue.global().async {
-            self.imageURLFromExtensionContext() { url in
-                if let url = url {
-                    let filename = url.lastPathComponent
-                    print(filename, url.path)
+            self.imageURLs = self.imageURLsFromExtensionContext()
 
-                    DispatchQueue.main.async {
-                        self.showAlert(title: "Import successful", message: "Image was added to its source project.")
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.showAlert(title: "Error loading image", message: "Unable to receive image from share panel.")
-                    }
+            guard !self.imageURLs.isEmpty else {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error loading image", message: "Unable to receive image from share panel.")
                 }
+                return
+            }
+
+            print(self.imageURLs.count)
+
+            DispatchQueue.main.async {
+                self.present(self.documentPickerVC, animated: true, completion: nil)
             }
         }
     }
 
-    func imageURLFromExtensionContext(completionHandler: @escaping (URL?) -> ()) {
-        for item in self.extensionContext!.inputItems as! [NSExtensionItem] {
-            for provider in item.attachments! {
-                if provider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
-                    provider.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { (imageURL, error) in
-                        if let imageURL = imageURL as? URL {
-                            completionHandler(imageURL)
-                        } else {
-                            completionHandler(nil)
-                        }
-                    })
-                    break
-                }
+    func imageURLsFromExtensionContext() -> [URL] {
+        let inputItems = self.extensionContext!.inputItems as! [NSExtensionItem]
+
+        let providers = inputItems.flatMap { item in
+            return (item.attachments ?? []).filter { provider in
+                return provider.hasItemConformingToTypeIdentifier(kUTTypeImage as String)
             }
         }
+
+        let imageURLs: [URL] = providers.compactMap {
+            let semaphore = DispatchSemaphore(value: 0)
+            var imageURL: URL? = nil
+
+            $0.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { url, error in
+                imageURL = url as? URL
+                semaphore.signal()
+            })
+
+            semaphore.wait()
+
+            return imageURL
+        }
+
+        return imageURLs
     }
 
     func showAlert(title: String, message: String) {
@@ -70,9 +71,53 @@ class ShareViewController: UIViewController {
 
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { _ in
             alert.dismiss(animated: true)
-            self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+            self.completeRequest()
         }))
 
         present(alert, animated: true)
+    }
+
+    func completeRequest() {
+        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+    }
+}
+
+extension ShareViewController: UIDocumentPickerDelegate {
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        self.completeRequest()
+    }
+
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let url = urls.first else {
+            showAlert(title: "No project received", message: "Document picker didn't return any documents.")
+            return
+        }
+
+        let document = Document(fileURL: url)
+        document.open {
+            guard $0 else {
+                self.showAlert(title: "Failed to import", message: "An error occurred while opening the document")
+                return
+            }
+
+            self.imageURLs.forEach {
+                do {
+                    try document.assetManager.store(from: $0, origin: .shareExtension)
+                } catch {
+                    print(error)
+                }
+            }
+
+            document.close {
+                guard $0 else {
+                    self.showAlert(title: "Failed to import", message: "An error occurred while saving the document")
+                    return
+                }
+            }
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.completeRequest()
+        })
     }
 }

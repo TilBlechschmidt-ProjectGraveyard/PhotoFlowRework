@@ -86,7 +86,7 @@ class AssetGridViewController: UICollectionViewController {
             cell.labelView.text = asset.name
 
             if asset.rejected {
-                cell.imagesView.alpha = 0.25
+                cell.imagesView.alpha = 0.15
                 cell.iconView.image = UIImage(systemName: "xmark.circle.fill")
                 cell.iconView.tintColor = .separator
             } else if asset.accepted {

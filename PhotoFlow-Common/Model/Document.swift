@@ -21,7 +21,8 @@ class Document: UIDocument {
         internal static let realm = "database.realm"
     }
 
-    lazy var representationManager: RepresentationManager = { RepresentationManager(document: self) }()
+    lazy var representationManager = RepresentationManager(document: self)
+    lazy var assetManager = AssetManager(document: self)
 
     private(set) var identifier = UUID()
 

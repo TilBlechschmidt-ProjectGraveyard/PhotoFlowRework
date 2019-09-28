@@ -70,7 +70,7 @@ class AssetGridCell: UICollectionViewCell {
         addImageView(imageView)
 
         labelView.textColor = .white
-        labelView.font = .preferredFont(forTextStyle: .caption1)
+        labelView.font = .preferredFont(forTextStyle: .subheadline)
         labelView.textColor = .label
         labelView.textAlignment = .center
 
@@ -92,7 +92,7 @@ class AssetGridCell: UICollectionViewCell {
         iconView.snp.makeConstraints { make in
             make.right.equalTo(labelView.snp.left).inset(-Constants.spacing / 2)
             make.centerY.equalTo(labelView.snp.centerY)
-            make.height.lessThanOrEqualTo(20)
+            make.height.lessThanOrEqualTo(labelView.font.lineHeight)
         }
 
         imagesView.snp.makeConstraints { make in
@@ -105,7 +105,7 @@ class AssetGridCell: UICollectionViewCell {
             make.top.equalTo(imagesView.snp.bottom).offset(Constants.spacing)
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.height.equalTo(30)
+            make.height.equalTo(labelView.font.lineHeight)
         }
 
         activityIndicator.startAnimating()

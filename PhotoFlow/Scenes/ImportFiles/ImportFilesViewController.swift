@@ -85,48 +85,18 @@ extension ImportFilesViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         progressView.alpha = 1
         DispatchQueue.global(qos: .userInitiated).async {
-            do {
-                let realm: Realm = try self.document.createRealm()
-
                 for (index, url) in urls.enumerated() {
                     DispatchQueue.main.async {
                         self.progressLabel.text = "Importing image \(index + 1) of \(urls.count)"
                     }
-                    try autoreleasepool {
-                        _ = url.startAccessingSecurityScopedResource()
-                        let data = try Data(contentsOf: url)
-                        url.stopAccessingSecurityScopedResource()
 
-                        guard let thumbnailData = CGImage.thumbnail(for: data) else {
-                            throw ImportError.thumbnailCreationFailed
-                        }
-
-                        let asset = Asset()
-                        asset.origin = .files
-                        asset.identifier = UUID()
-                        asset.name = url.deletingPathExtension().lastPathComponent
-                        asset.uti = url.typeIdentifier ?? "public.image"
-
-                        let original = Representation()
-                        original.type = .original
-                        original.identifier = data.sha256String()
-                        asset.representations.append(original)
-
-                        let thumbnail = Representation()
-                        thumbnail.type = .thumbnail
-                        thumbnail.identifier = thumbnailData.sha256String()
-                        asset.representations.append(thumbnail)
-
-                        realm.beginWrite()
-                        realm.add(asset)
-                        try self.document.representationManager.store(data, for: original.identifier)
-                        try self.document.representationManager.store(thumbnailData, for: thumbnail.identifier)
-                        try realm.commitWrite()
+                    do {
+                        try self.document.assetManager.store(from: url, origin: .files)
+                    } catch {
+                        // TODO Tell the user somehow (alert maybe?)
+                        print(error)
                     }
                 }
-            } catch {
-                print(error)
-            }
 
             DispatchQueue.main.async {
                 self.progressLabel.text = "Saving project"

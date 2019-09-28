@@ -15,6 +15,23 @@
 		30349BF9233A51190082FC8A /* UIView+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30349BF8233A51190082FC8A /* UIView+Blur.swift */; };
 		30349BFB233A59DF0082FC8A /* AssetGridAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30349BFA233A59DF0082FC8A /* AssetGridAnimator.swift */; };
 		30349BFE233A616D0082FC8A /* AssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30349BFD233A616D0082FC8A /* AssetViewController.swift */; };
+		303DE789233FF0F300B74A80 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303DE788233FF0F300B74A80 /* MainInterface.storyboard */; };
+		303DE7C0233FF64100B74A80 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307A3FF12338EF5200CDEC21 /* Document.swift */; };
+		303DE7C1233FF64100B74A80 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309218C7233A0D33002A4258 /* Asset.swift */; };
+		303DE7C2233FF64100B74A80 /* Representation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309218C9233A0DEF002A4258 /* Representation.swift */; };
+		303DE7C3233FF64100B74A80 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B77D34233E2EFA0018A043 /* Tag.swift */; };
+		303DE7C4233FF64100B74A80 /* RepresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30349BEB233A35C80082FC8A /* RepresentationManager.swift */; };
+		303DE7C5233FF64100B74A80 /* UIApplication+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307A401123395B7D00CDEC21 /* UIApplication+Directories.swift */; };
+		303DE7C6233FF64100B74A80 /* Data+SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309218CB233A118F002A4258 /* Data+SHA256.swift */; };
+		303DE7C7233FF64100B74A80 /* CGImage+Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30349BED233A3AEC0082FC8A /* CGImage+Thumbnail.swift */; };
+		303DE7C8233FF64100B74A80 /* UIView+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30349BF8233A51190082FC8A /* UIView+Blur.swift */; };
+		303DE7C9233FF64100B74A80 /* UIViewController+Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A5870B233B6A1C00EFFF50 /* UIViewController+Child.swift */; };
+		303DE7CA233FF64100B74A80 /* CGAffineTransform+ReadValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B77D10233D43CC0018A043 /* CGAffineTransform+ReadValues.swift */; };
+		303DE7CB233FF64100B74A80 /* URL+UTI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2B00D233EB0A600EB8547 /* URL+UTI.swift */; };
+		303DE7CE233FF66300B74A80 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 303DE7CD233FF66300B74A80 /* Realm */; };
+		303DE7D0233FF66300B74A80 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 303DE7CF233FF66300B74A80 /* RealmSwift */; };
+		303DE7D2233FFA6200B74A80 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303DE7D1233FFA6200B74A80 /* AssetManager.swift */; };
+		303DE7D3233FFB6D00B74A80 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303DE7D1233FFA6200B74A80 /* AssetManager.swift */; };
 		307A3FEC2338EF5200CDEC21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307A3FEB2338EF5200CDEC21 /* AppDelegate.swift */; };
 		307A3FEE2338EF5200CDEC21 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307A3FED2338EF5200CDEC21 /* DocumentBrowserViewController.swift */; };
 		307A3FF02338EF5200CDEC21 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307A3FEF2338EF5200CDEC21 /* DocumentViewController.swift */; };
@@ -74,6 +91,8 @@
 		30349BF8233A51190082FC8A /* UIView+Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Blur.swift"; sourceTree = "<group>"; };
 		30349BFA233A59DF0082FC8A /* AssetGridAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetGridAnimator.swift; sourceTree = "<group>"; };
 		30349BFD233A616D0082FC8A /* AssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewController.swift; sourceTree = "<group>"; };
+		303DE788233FF0F300B74A80 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		303DE7D1233FFA6200B74A80 /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 		307A3FE82338EF5200CDEC21 /* PhotoFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		307A3FEB2338EF5200CDEC21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		307A3FED2338EF5200CDEC21 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +115,8 @@
 		30E2B025233EB76200EB8547 /* PhotoFlow-ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PhotoFlow-ShareExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30E2B027233EB76200EB8547 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		30E2B02C233EB76200EB8547 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30E2B034233FDAEC00EB8547 /* PhotoFlow-ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PhotoFlow-ShareExtension.entitlements"; sourceTree = "<group>"; };
+		30E2B035233FDB0B00EB8547 /* PhotoFlow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PhotoFlow.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +134,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				303DE7D0233FF66300B74A80 /* RealmSwift in Frameworks */,
+				303DE7CE233FF66300B74A80 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,12 +161,40 @@
 			path = ViewingAssets;
 			sourceTree = "<group>";
 		};
+		303DE7BE233FF60B00B74A80 /* PhotoFlow-Common */ = {
+			isa = PBXGroup;
+			children = (
+				309218C6233A0D28002A4258 /* Model */,
+				303DE7BF233FF62C00B74A80 /* Managers */,
+				309218C5233A0D05002A4258 /* Extensions */,
+			);
+			path = "PhotoFlow-Common";
+			sourceTree = "<group>";
+		};
+		303DE7BF233FF62C00B74A80 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				30349BEB233A35C80082FC8A /* RepresentationManager.swift */,
+				303DE7D1233FFA6200B74A80 /* AssetManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		303DE7CC233FF66300B74A80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		307A3FDF2338EF5200CDEC21 = {
 			isa = PBXGroup;
 			children = (
 				307A3FEA2338EF5200CDEC21 /* PhotoFlow */,
 				30E2B026233EB76200EB8547 /* PhotoFlow-ShareExtension */,
+				303DE7BE233FF60B00B74A80 /* PhotoFlow-Common */,
 				307A3FE92338EF5200CDEC21 /* Products */,
+				303DE7CC233FF66300B74A80 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,10 +210,8 @@
 		307A3FEA2338EF5200CDEC21 /* PhotoFlow */ = {
 			isa = PBXGroup;
 			children = (
-				309218C6233A0D28002A4258 /* Model */,
 				309218CF233A1F08002A4258 /* Common */,
 				309218CD233A1EBC002A4258 /* Scenes */,
-				309218C5233A0D05002A4258 /* Extensions */,
 				309218C3233A0CE4002A4258 /* Support Files */,
 			);
 			path = PhotoFlow;
@@ -171,6 +220,7 @@
 		309218C3233A0CE4002A4258 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				30E2B035233FDB0B00EB8547 /* PhotoFlow.entitlements */,
 				307A400D233956DF00CDEC21 /* Info.plist */,
 				307A400A2339569700CDEC21 /* FileIcon.png */,
 				307A40092339569700CDEC21 /* Assets.xcassets */,
@@ -237,7 +287,6 @@
 		309218CF233A1F08002A4258 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				30349BEB233A35C80082FC8A /* RepresentationManager.swift */,
 				30349BF6233A41970082FC8A /* PanDirectionGestureRecognizer.swift */,
 			);
 			path = Common;
@@ -262,8 +311,10 @@
 		30E2B026233EB76200EB8547 /* PhotoFlow-ShareExtension */ = {
 			isa = PBXGroup;
 			children = (
+				30E2B034233FDAEC00EB8547 /* PhotoFlow-ShareExtension.entitlements */,
 				30E2B027233EB76200EB8547 /* ShareViewController.swift */,
 				30E2B02C233EB76200EB8547 /* Info.plist */,
+				303DE788233FF0F300B74A80 /* MainInterface.storyboard */,
 			);
 			path = "PhotoFlow-ShareExtension";
 			sourceTree = "<group>";
@@ -308,6 +359,10 @@
 			dependencies = (
 			);
 			name = "PhotoFlow-ShareExtension";
+			packageProductDependencies = (
+				303DE7CD233FF66300B74A80 /* Realm */,
+				303DE7CF233FF66300B74A80 /* RealmSwift */,
+			);
 			productName = "PhotoFlow-ShareExtension";
 			productReference = 30E2B025233EB76200EB8547 /* PhotoFlow-ShareExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -368,6 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				303DE789233FF0F300B74A80 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +450,7 @@
 				30349BF9233A51190082FC8A /* UIView+Blur.swift in Sources */,
 				30B77D11233D43CC0018A043 /* CGAffineTransform+ReadValues.swift in Sources */,
 				30E2B00E233EB0A600EB8547 /* URL+UTI.swift in Sources */,
+				303DE7D3233FFB6D00B74A80 /* AssetManager.swift in Sources */,
 				307A3FEE2338EF5200CDEC21 /* DocumentBrowserViewController.swift in Sources */,
 				30349BFB233A59DF0082FC8A /* AssetGridAnimator.swift in Sources */,
 				30A5870C233B6A1C00EFFF50 /* UIViewController+Child.swift in Sources */,
@@ -408,6 +465,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				303DE7C1233FF64100B74A80 /* Asset.swift in Sources */,
+				303DE7C8233FF64100B74A80 /* UIView+Blur.swift in Sources */,
+				303DE7C0233FF64100B74A80 /* Document.swift in Sources */,
+				303DE7C6233FF64100B74A80 /* Data+SHA256.swift in Sources */,
+				303DE7C7233FF64100B74A80 /* CGImage+Thumbnail.swift in Sources */,
+				303DE7C3233FF64100B74A80 /* Tag.swift in Sources */,
+				303DE7D2233FFA6200B74A80 /* AssetManager.swift in Sources */,
+				303DE7C5233FF64100B74A80 /* UIApplication+Directories.swift in Sources */,
+				303DE7CA233FF64100B74A80 /* CGAffineTransform+ReadValues.swift in Sources */,
+				303DE7C2233FF64100B74A80 /* Representation.swift in Sources */,
+				303DE7CB233FF64100B74A80 /* URL+UTI.swift in Sources */,
+				303DE7C9233FF64100B74A80 /* UIViewController+Child.swift in Sources */,
+				303DE7C4233FF64100B74A80 /* RepresentationManager.swift in Sources */,
 				30E2B028233EB76200EB8547 /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,6 +623,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "PhotoFlow/Support Files/PhotoFlow.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LQWS3ZT7UK;
 				INFOPLIST_FILE = "PhotoFlow/Support Files/Info.plist";
@@ -572,6 +643,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "PhotoFlow/Support Files/PhotoFlow.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LQWS3ZT7UK;
 				INFOPLIST_FILE = "PhotoFlow/Support Files/Info.plist";
@@ -589,6 +661,7 @@
 		30E2B031233EB76200EB8547 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "PhotoFlow-ShareExtension/PhotoFlow-ShareExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LQWS3ZT7UK;
 				INFOPLIST_FILE = "PhotoFlow-ShareExtension/Info.plist";
@@ -609,6 +682,7 @@
 		30E2B032233EB76200EB8547 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "PhotoFlow-ShareExtension/PhotoFlow-ShareExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LQWS3ZT7UK;
 				INFOPLIST_FILE = "PhotoFlow-ShareExtension/Info.plist";
@@ -678,6 +752,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		303DE7CD233FF66300B74A80 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 307A400123390B5800CDEC21 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		303DE7CF233FF66300B74A80 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 307A400123390B5800CDEC21 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
 		307A400223390B5800CDEC21 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 307A400123390B5800CDEC21 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
