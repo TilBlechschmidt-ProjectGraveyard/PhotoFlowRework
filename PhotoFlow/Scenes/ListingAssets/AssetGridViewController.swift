@@ -12,18 +12,21 @@ import RealmSwift
 class AssetGridViewController: UICollectionViewController {
     private let document: Document
     private let realm: Realm
+    private let request: AssetRequest
     private let results: Results<Asset>
-    var notificationToken: NotificationToken?
+    private var notificationToken: NotificationToken?
 
     deinit {
         notificationToken?.invalidate()
         notificationToken = nil
     }
 
-    init(document: Document) throws {
+    init(document: Document, request: AssetRequest = AssetRequest()) throws {
         self.document = document
         self.realm = try document.createRealm()
-        self.results = realm.objects(Asset.self).sorted(byKeyPath: "name")
+
+        self.request = request
+        self.results = request.execute(on: realm)
 
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
@@ -127,10 +130,11 @@ class AssetGridViewController: UICollectionViewController {
         // TODO Show loading indicator
         let asset = results[indexPath.item]
         guard let cell = collectionView.cellForItem(at: indexPath) as? AssetGridCell,
-            let thumbnailRepresentation = asset.representations.filter("rawType = \(RepresentationType.thumbnail.rawValue)").first,
-            let thumbnailData = document.representationManager.load(thumbnailRepresentation.identifier),
-            let representation = asset.representations.filter("rawType = \(RepresentationType.original.rawValue)").first,
-            let data = document.representationManager.load(representation.identifier)
+            let thumbnailData = document.representationManager.load(asset: asset, type: .thumbnail)
+//            let thumbnailRepresentation = asset.representations.filter("rawType = \(RepresentationType.thumbnail.rawValue)").first,
+//            let thumbnailData = document.representationManager.load(thumbnailRepresentation.identifier),
+//            let representation = asset.representations.filter("rawType = \(RepresentationType.original.rawValue)").first,
+//            let data = document.representationManager.load(representation.identifier)
         else {
             return
         }
@@ -139,7 +143,10 @@ class AssetGridViewController: UICollectionViewController {
         selectedFrame = bounds.map { cell.imageView.convert($0, to: collectionView.superview) }
         selectedImage = thumbnailData.image
 
-        let assetViewController = AssetViewController(document: document, asset: asset, data: data)
+        guard let assetViewController = AssetViewController(document: document, request: request, asset: asset) else {
+            return
+        }
+
         parent?.navigationController?.pushViewController(assetViewController, animated: true)
     }
 }

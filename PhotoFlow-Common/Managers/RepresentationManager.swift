@@ -82,6 +82,11 @@ class RepresentationManager {
             return nil
         }
     }
+
+    func load(asset: Asset, type: RepresentationType, useCache: Bool = true) -> RepresentationData? {
+        let representation = asset.representations.filter("rawType = \(type.rawValue)").first
+        return representation.flatMap { document.representationManager.load($0.identifier) }
+    }
 }
 
 extension Document.Filenames {

@@ -39,14 +39,10 @@ class DocumentViewController: UIViewController {
 
         let gridViewController = try! AssetGridViewController(document: document)
         add(gridViewController)
-        addChild(gridViewController)
 
-        view.addSubview(gridViewController.view)
         gridViewController.view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-
-        gridViewController.didMove(toParent: self)
     }
 
     @objc func closeDocument() {

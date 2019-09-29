@@ -44,6 +44,7 @@ class PanDirectionGestureRecognizer: UIPanGestureRecognizer {
     weak var draggableView: UIView?
 
     var onSuccessfulSwipe: ((Bool) -> Void)?
+    var onImmediateSuccessfulSwipe: ((Bool) -> Void)?
 
     @objc func handleAction(recognizer: PanDirectionGestureRecognizer) {
         guard let view = self.view else { return }
@@ -89,12 +90,14 @@ class PanDirectionGestureRecognizer: UIPanGestureRecognizer {
                     self.leftActionView?.alpha = 0
                     self.rightActionView?.alpha = 0
                     self.draggableView?.transform = CGAffineTransform.identity
+
+                    if abs(distancePercentage) == 1 {
+                        self.onImmediateSuccessfulSwipe?(distancePercentage > 0)
+                    }
                 },
                 completion: { _ in
                     if abs(distancePercentage) == 1 {
                         self.onSuccessfulSwipe?(distancePercentage > 0)
-                        // TODO
-                        // self.controller.userDidSwipeCell(left: distancePercentage < 0)
                     }
                 }
             )

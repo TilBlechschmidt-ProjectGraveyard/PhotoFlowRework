@@ -8,6 +8,23 @@
 
 import Foundation
 import CoreGraphics
+import RealmSwift
+
+struct AssetRequest {
+    let predicate: NSPredicate
+    let sortKey: String
+
+    init(predicate: NSPredicate = .init(value: true), sortBy: String = "name") {
+        self.predicate = predicate
+        self.sortKey = sortBy
+    }
+
+    func execute(on realm: Realm) -> Results<Asset> {
+        return realm.objects(Asset.self)
+            .filter(predicate)
+            .sorted(byKeyPath: sortKey)
+    }
+}
 
 enum AssetManagerError: Error {
     case thumbnailCreationFailed

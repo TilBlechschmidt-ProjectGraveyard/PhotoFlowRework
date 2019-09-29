@@ -48,6 +48,7 @@
 		309218CA233A0DEF002A4258 /* Representation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309218C9233A0DEF002A4258 /* Representation.swift */; };
 		309218CC233A118F002A4258 /* Data+SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309218CB233A118F002A4258 /* Data+SHA256.swift */; };
 		309218DF233A28F1002A4258 /* ImportFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309218DE233A28F1002A4258 /* ImportFilesViewController.swift */; };
+		309BE4802340D91A001AC5F7 /* RepresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309BE47F2340D91A001AC5F7 /* RepresentationViewController.swift */; };
 		30A5870C233B6A1C00EFFF50 /* UIViewController+Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A5870B233B6A1C00EFFF50 /* UIViewController+Child.swift */; };
 		30B77D0F233D30100018A043 /* PanDirectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30349BF6233A41970082FC8A /* PanDirectionGestureRecognizer.swift */; };
 		30B77D11233D43CC0018A043 /* CGAffineTransform+ReadValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B77D10233D43CC0018A043 /* CGAffineTransform+ReadValues.swift */; };
@@ -108,6 +109,7 @@
 		309218C9233A0DEF002A4258 /* Representation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Representation.swift; sourceTree = "<group>"; };
 		309218CB233A118F002A4258 /* Data+SHA256.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+SHA256.swift"; sourceTree = "<group>"; };
 		309218DE233A28F1002A4258 /* ImportFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFilesViewController.swift; sourceTree = "<group>"; };
+		309BE47F2340D91A001AC5F7 /* RepresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentationViewController.swift; sourceTree = "<group>"; };
 		30A5870B233B6A1C00EFFF50 /* UIViewController+Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Child.swift"; sourceTree = "<group>"; };
 		30B77D10233D43CC0018A043 /* CGAffineTransform+ReadValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+ReadValues.swift"; sourceTree = "<group>"; };
 		30B77D34233E2EFA0018A043 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				30349BFD233A616D0082FC8A /* AssetViewController.swift */,
+				309BE47F2340D91A001AC5F7 /* RepresentationViewController.swift */,
 			);
 			path = ViewingAssets;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				30E2B00E233EB0A600EB8547 /* URL+UTI.swift in Sources */,
 				303DE7D3233FFB6D00B74A80 /* AssetManager.swift in Sources */,
 				307A3FEE2338EF5200CDEC21 /* DocumentBrowserViewController.swift in Sources */,
+				309BE4802340D91A001AC5F7 /* RepresentationViewController.swift in Sources */,
 				30349BFB233A59DF0082FC8A /* AssetGridAnimator.swift in Sources */,
 				30A5870C233B6A1C00EFFF50 /* UIViewController+Child.swift in Sources */,
 				307A3FF02338EF5200CDEC21 /* DocumentViewController.swift in Sources */,
