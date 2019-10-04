@@ -61,7 +61,7 @@ class HorizontalListViewController: UICollectionViewController {
         
         view.backgroundColor = .systemBackground
         
-        self.selectionObserver = SelectionObserver {
+        self.selectionObserver = SelectionObserver { [unowned self] in
             self.refreshSelection(of: $0)
         }
         

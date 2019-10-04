@@ -45,7 +45,7 @@ class AssetGridViewController: UICollectionViewController {
 
         setupUI()
         
-        self.selectionObserver = SelectionObserver {
+        self.selectionObserver = SelectionObserver { [unowned self] in
             if let identifier = $0, let index = self.results.index(matching: "rawIdentifier = %@", identifier) {
                 self.collectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .centeredHorizontally)
             } else {

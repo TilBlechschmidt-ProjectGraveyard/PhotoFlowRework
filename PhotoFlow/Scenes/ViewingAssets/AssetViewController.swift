@@ -84,7 +84,7 @@ class AssetViewController: UIViewController {
             make.height.equalTo(75)
         }
         
-        selectionObserver = SelectionObserver {
+        selectionObserver = SelectionObserver { [unowned self] in
             guard let identifier = $0, let asset = self.results.filter("rawIdentifier = %@", identifier).first else { return }
             self.asset = asset
         }

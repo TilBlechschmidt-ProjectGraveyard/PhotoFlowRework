@@ -64,6 +64,10 @@
 		309218DF233A28F1002A4258 /* ImportFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309218DE233A28F1002A4258 /* ImportFilesViewController.swift */; };
 		309BE4802340D91A001AC5F7 /* RepresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309BE47F2340D91A001AC5F7 /* RepresentationViewController.swift */; };
 		30A5870C233B6A1C00EFFF50 /* UIViewController+Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A5870B233B6A1C00EFFF50 /* UIViewController+Child.swift */; };
+		30B4AB942347CD070055A31B /* CGImage+Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B4AB932347CD070055A31B /* CGImage+Histogram.swift */; };
+		30B4AB952347CD070055A31B /* CGImage+Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B4AB932347CD070055A31B /* CGImage+Histogram.swift */; };
+		30B4AB972347E70D0055A31B /* FloatingPoint+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B4AB962347E70D0055A31B /* FloatingPoint+Bytes.swift */; };
+		30B4AB982347E70D0055A31B /* FloatingPoint+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B4AB962347E70D0055A31B /* FloatingPoint+Bytes.swift */; };
 		30B77D0F233D30100018A043 /* PanDirectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30349BF6233A41970082FC8A /* PanDirectionGestureRecognizer.swift */; };
 		30B77D11233D43CC0018A043 /* CGAffineTransform+ReadValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B77D10233D43CC0018A043 /* CGAffineTransform+ReadValues.swift */; };
 		30B77D35233E2EFA0018A043 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B77D34233E2EFA0018A043 /* Tag.swift */; };
@@ -133,6 +137,8 @@
 		309218DE233A28F1002A4258 /* ImportFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFilesViewController.swift; sourceTree = "<group>"; };
 		309BE47F2340D91A001AC5F7 /* RepresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentationViewController.swift; sourceTree = "<group>"; };
 		30A5870B233B6A1C00EFFF50 /* UIViewController+Child.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Child.swift"; sourceTree = "<group>"; };
+		30B4AB932347CD070055A31B /* CGImage+Histogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+Histogram.swift"; sourceTree = "<group>"; };
+		30B4AB962347E70D0055A31B /* FloatingPoint+Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Bytes.swift"; sourceTree = "<group>"; };
 		30B77D10233D43CC0018A043 /* CGAffineTransform+ReadValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGAffineTransform+ReadValues.swift"; sourceTree = "<group>"; };
 		30B77D34233E2EFA0018A043 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		30E2B00D233EB0A600EB8547 /* URL+UTI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+UTI.swift"; sourceTree = "<group>"; };
@@ -280,13 +286,15 @@
 		309218C5233A0D05002A4258 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3048CED6234776C1005EAB88 /* Dictionary+Take.swift */,
-				307A401123395B7D00CDEC21 /* UIApplication+Directories.swift */,
-				309218CB233A118F002A4258 /* Data+SHA256.swift */,
+				30B77D10233D43CC0018A043 /* CGAffineTransform+ReadValues.swift */,
+				30B4AB932347CD070055A31B /* CGImage+Histogram.swift */,
 				30349BED233A3AEC0082FC8A /* CGImage+Thumbnail.swift */,
+				309218CB233A118F002A4258 /* Data+SHA256.swift */,
+				3048CED6234776C1005EAB88 /* Dictionary+Take.swift */,
+				30B4AB962347E70D0055A31B /* FloatingPoint+Bytes.swift */,
+				307A401123395B7D00CDEC21 /* UIApplication+Directories.swift */,
 				30349BF8233A51190082FC8A /* UIView+Blur.swift */,
 				30A5870B233B6A1C00EFFF50 /* UIViewController+Child.swift */,
-				30B77D10233D43CC0018A043 /* CGAffineTransform+ReadValues.swift */,
 				30E2B00D233EB0A600EB8547 /* URL+UTI.swift */,
 			);
 			path = Extensions;
@@ -475,6 +483,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30B4AB942347CD070055A31B /* CGImage+Histogram.swift in Sources */,
 				307A40102339584900CDEC21 /* SceneDelegate.swift in Sources */,
 				309218C8233A0D33002A4258 /* Asset.swift in Sources */,
 				3048CECA23477686005EAB88 /* EXIFMetadata.swift in Sources */,
@@ -497,6 +506,7 @@
 				30349BF9233A51190082FC8A /* UIView+Blur.swift in Sources */,
 				30B77D11233D43CC0018A043 /* CGAffineTransform+ReadValues.swift in Sources */,
 				30E2B00E233EB0A600EB8547 /* URL+UTI.swift in Sources */,
+				30B4AB972347E70D0055A31B /* FloatingPoint+Bytes.swift in Sources */,
 				303DE7D3233FFB6D00B74A80 /* AssetManager.swift in Sources */,
 				307A3FEE2338EF5200CDEC21 /* DocumentBrowserViewController.swift in Sources */,
 				3048CED423477686005EAB88 /* TIFFMetadata.swift in Sources */,
@@ -525,9 +535,11 @@
 				303DE7C3233FF64100B74A80 /* Tag.swift in Sources */,
 				3048CECD23477686005EAB88 /* CLLocation+EXIF.swift in Sources */,
 				303DE7D2233FFA6200B74A80 /* AssetManager.swift in Sources */,
+				30B4AB982347E70D0055A31B /* FloatingPoint+Bytes.swift in Sources */,
 				3048CED123477686005EAB88 /* EXIFAuxMetadata.swift in Sources */,
 				303DE7C5233FF64100B74A80 /* UIApplication+Directories.swift in Sources */,
 				3048CECF23477686005EAB88 /* Metadata.swift in Sources */,
+				30B4AB952347CD070055A31B /* CGImage+Histogram.swift in Sources */,
 				303DE7CA233FF64100B74A80 /* CGAffineTransform+ReadValues.swift in Sources */,
 				3048CECB23477686005EAB88 /* EXIFMetadata.swift in Sources */,
 				303DE7C2233FF64100B74A80 /* Representation.swift in Sources */,

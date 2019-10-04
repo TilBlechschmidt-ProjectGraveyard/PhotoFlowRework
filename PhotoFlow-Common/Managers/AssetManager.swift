@@ -47,11 +47,11 @@ class AssetManager {
 
             let data = try Data(contentsOf: url)
 
-            guard let thumbnailData = CGImage.thumbnail(for: data), let ciImage = CIImage(data: data) else {
+            guard let thumbnailData = CGImage.thumbnail(for: data) else {
                 throw AssetManagerError.thumbnailCreationFailed
             }
 
-            let metadata = Metadata(fromCIImage: ciImage)
+            let metadata = Metadata(data)
             let asset = Asset()
             asset.origin = origin
             asset.identifier = UUID()
@@ -70,10 +70,10 @@ class AssetManager {
             asset.representations.append(thumbnail)
 
             realm.beginWrite()
-            metadata.tiff.map { realm.add($0) }
-            metadata.exif.map { realm.add($0) }
-            metadata.aux.map { realm.add($0) }
-            realm.add(metadata)
+            metadata?.tiff.map { realm.add($0) }
+            metadata?.exif.map { realm.add($0) }
+            metadata?.aux.map { realm.add($0) }
+            metadata.map { realm.add($0) }
             realm.add(asset)
             try self.document.representationManager.store(data, for: original.identifier)
             try self.document.representationManager.store(thumbnailData, for: thumbnail.identifier)

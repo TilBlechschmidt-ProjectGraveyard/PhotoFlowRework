@@ -23,20 +23,26 @@ class Metadata: Object {
     dynamic var aux: EXIFAuxMetadata? = nil
 
 //    let location: CLLocationCoordinate2D?
+
+    dynamic var rawHistogram = Data()
 }
 
 extension Metadata {
-    convenience init?(fromUIImage image: UIImage) {
-        guard let ciImage = image.ciImage ?? CIImage(image: image) else {
-            return nil
-        }
-
-        self.init(fromCIImage: ciImage)
-    }
+//    convenience init?(fromUIImage image: UIImage) {
+//        guard let ciImage = image.ciImage ?? CIImage(image: image) else {
+//            return nil
+//        }
+//
+//        self.init(fromCIImage: ciImage)
+//    }
     
-    convenience init(fromCIImage image: CIImage) {
+    convenience init?(_ data: Data) {
         self.init()
         
+        guard let cgImage = UIImage(data: data)?.cgImage else { return nil }
+        histogram = cgImage.calculateNormalizedHistogram()
+
+        guard let image = CIImage(data: data) else { return nil }
         let dict = image.properties
 
         orientation = dict.take(from: "Orientation").flatMap { UIImage.Orientation(fromExif: $0) } ?? UIImage.Orientation.up
@@ -67,6 +73,15 @@ extension Metadata {
         }
         set {
             rawOrientation = newValue.rawValue
+        }
+    }
+    
+    var histogram: NormalizedHistogram {
+        get {
+            return NormalizedHistogram.decode(rawHistogram) ?? NormalizedHistogram()
+        }
+        set {
+            rawHistogram = newValue.encode()
         }
     }
 }
