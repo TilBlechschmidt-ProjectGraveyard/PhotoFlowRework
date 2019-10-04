@@ -21,6 +21,8 @@ class Asset: Object {
 
     dynamic var name = ""
     dynamic var uti = ""
+    
+    dynamic var metadata: Metadata? = nil
 
     let representations = List<Representation>()
     let tags = List<Tag>()

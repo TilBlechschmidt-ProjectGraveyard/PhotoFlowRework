@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreGraphics
+import CoreImage
 import RealmSwift
 
 struct AssetRequest {
@@ -46,15 +47,17 @@ class AssetManager {
 
             let data = try Data(contentsOf: url)
 
-            guard let thumbnailData = CGImage.thumbnail(for: data) else {
+            guard let thumbnailData = CGImage.thumbnail(for: data), let ciImage = CIImage(data: data) else {
                 throw AssetManagerError.thumbnailCreationFailed
             }
 
+            let metadata = Metadata(fromCIImage: ciImage)
             let asset = Asset()
             asset.origin = origin
             asset.identifier = UUID()
             asset.name = url.deletingPathExtension().lastPathComponent
             asset.uti = url.typeIdentifier ?? "public.image"
+            asset.metadata = metadata
 
             let original = Representation()
             original.type = .original
@@ -67,6 +70,10 @@ class AssetManager {
             asset.representations.append(thumbnail)
 
             realm.beginWrite()
+            metadata.tiff.map { realm.add($0) }
+            metadata.exif.map { realm.add($0) }
+            metadata.aux.map { realm.add($0) }
+            realm.add(metadata)
             realm.add(asset)
             try self.document.representationManager.store(data, for: original.identifier)
             try self.document.representationManager.store(thumbnailData, for: thumbnail.identifier)

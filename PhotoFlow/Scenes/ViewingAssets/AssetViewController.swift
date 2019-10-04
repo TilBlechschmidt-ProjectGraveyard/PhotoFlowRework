@@ -20,10 +20,13 @@ class AssetViewController: UIViewController {
     private let results: Results<Asset>
     private var asset: Asset { didSet { updateAsset() } }
     private var data: RepresentationData!
+    
+    private var selectionObserver: SelectionObserver?
 
     private var preloadedItems: [RepresentationData] = []
 
     private let representationViewController = RepresentationViewController()
+    private let horizontalListViewController: HorizontalListViewController
 
     private lazy var rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(exportAsset))
 
@@ -41,12 +44,14 @@ class AssetViewController: UIViewController {
         return item
     }
 
-    init?(document: Document, request: AssetRequest, asset: Asset) {
+    init?(document: Document, request: AssetRequest, asset: Asset) throws {
         self.document = document
-        self.realm = try! document.createRealm()
+        self.realm = try document.createRealm()
         self.request = request
         self.results = request.execute(on: realm)
         self.asset = asset
+        
+        self.horizontalListViewController = try HorizontalListViewController(document: document, request: request)
 
         super.init(nibName: nil, bundle: nil)
 
@@ -61,10 +66,27 @@ class AssetViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         add(representationViewController)
+        add(horizontalListViewController)
+        
         representationViewController.view.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(horizontalListViewController.view.snp.bottom)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        horizontalListViewController.view.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.height.equalTo(75)
+        }
+        
+        selectionObserver = SelectionObserver {
+            guard let identifier = $0, let asset = self.results.filter("rawIdentifier = %@", identifier).first else { return }
+            self.asset = asset
         }
     }
 
@@ -120,6 +142,7 @@ class AssetViewController: UIViewController {
     private func changeIndex(by delta: Int) {
         if let newIndex = indexChanged(by: delta) {
             self.asset = results[newIndex]
+            self.selectionObserver?.notifier.select(self.asset.rawIdentifier)
         }
     }
 
@@ -151,5 +174,9 @@ extension AssetViewController: RepresentationViewControllerDelegate {
 
     func representationViewControllerSwipedBackwards() {
         changeIndex(by: -1)
+    }
+    
+    func representationViewControllerSwipedDownwards() {
+        navigationController?.popViewController(animated: true)
     }
 }

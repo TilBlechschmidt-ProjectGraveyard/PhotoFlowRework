@@ -14,6 +14,7 @@ protocol RepresentationViewControllerDelegate: class {
 
     func representationViewControllerSwipedForward()
     func representationViewControllerSwipedBackwards()
+    func representationViewControllerSwipedDownwards()
 }
 
 class RepresentationViewController: UIViewController {
@@ -97,6 +98,16 @@ class RepresentationViewController: UIViewController {
         rejectGestureRecognizer.numberOfTouchesRequired = 2
         imageView.addGestureRecognizer(rejectGestureRecognizer)
 
+        let dismissGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(dismissSelf))
+        dismissGestureRecognizer.direction = .down
+        dismissGestureRecognizer.numberOfTouchesRequired = 1
+        imageView.addGestureRecognizer(dismissGestureRecognizer)
+        
+        let zoomGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleZoom))
+        zoomGestureRecognizer.numberOfTapsRequired = 2
+        zoomGestureRecognizer.numberOfTouchesRequired = 1
+        imageView.addGestureRecognizer(zoomGestureRecognizer)
+        
         let horizontalPanGestureRecognizer = PanDirectionGestureRecognizer(direction: .horizontal)
         horizontalPanGestureRecognizer.leftActionView = prevImageView
         horizontalPanGestureRecognizer.rightActionView = nextImageView
@@ -126,6 +137,30 @@ class RepresentationViewController: UIViewController {
 
     @objc func rejectAsset() {
         delegate?.representationViewControllerDidRejectAsset()
+    }
+    
+    @objc func dismissSelf() {
+        delegate?.representationViewControllerSwipedDownwards()
+    }
+    
+    @objc func toggleZoom(recognizer: UITapGestureRecognizer) {
+        let view = imageView
+        let bounds = view.bounds
+        var center = recognizer.location(in: view)
+        center.x -= bounds.midX;
+        center.y -= bounds.midY;
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            if view.transform.scaleX > 1 || view.transform.translationX != 0 || view.transform.translationY != 0 {
+                let inverseScale = 1 / view.transform.scaleX
+                view.transform = view.transform.scaledBy(x: inverseScale, y: inverseScale).translatedBy(x: -view.transform.translationX, y: -view.transform.translationY)
+            } else if view.transform.scaleX == 1 {
+                view.transform = view.transform
+                    .translatedBy(x: center.x, y: center.y)
+                    .scaledBy(x: 3, y: 3)
+                    .translatedBy(x: -center.x, y: -center.y)
+            }
+        })
     }
 
     @objc func userPanned(recognizer: UIPanGestureRecognizer) {

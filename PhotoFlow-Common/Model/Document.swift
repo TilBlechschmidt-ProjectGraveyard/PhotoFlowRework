@@ -81,7 +81,8 @@ extension Document {
 extension Document {
     func createRealm(url: URL? = nil) throws -> Realm {
         let url = url ?? fileURL.appendingPathComponent(Document.Filenames.realm)
-        let configuration = Realm.Configuration(fileURL: url, objectTypes: [Tag.self, Asset.self, Representation.self])
+        let types = [Tag.self, Asset.self, Representation.self, Metadata.self, TIFFMetadata.self, EXIFMetadata.self, EXIFAuxMetadata.self]
+        let configuration = Realm.Configuration(fileURL: url, objectTypes: types)
         return try Realm(configuration: configuration)
     }
 }

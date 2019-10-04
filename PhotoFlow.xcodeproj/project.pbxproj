@@ -32,6 +32,20 @@
 		303DE7D0233FF66300B74A80 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 303DE7CF233FF66300B74A80 /* RealmSwift */; };
 		303DE7D2233FFA6200B74A80 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303DE7D1233FFA6200B74A80 /* AssetManager.swift */; };
 		303DE7D3233FFB6D00B74A80 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303DE7D1233FFA6200B74A80 /* AssetManager.swift */; };
+		3048CEBC23476B17005EAB88 /* HorizontalListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEBB23476B17005EAB88 /* HorizontalListViewController.swift */; };
+		3048CECA23477686005EAB88 /* EXIFMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEC423477686005EAB88 /* EXIFMetadata.swift */; };
+		3048CECB23477686005EAB88 /* EXIFMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEC423477686005EAB88 /* EXIFMetadata.swift */; };
+		3048CECC23477686005EAB88 /* CLLocation+EXIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEC523477686005EAB88 /* CLLocation+EXIF.swift */; };
+		3048CECD23477686005EAB88 /* CLLocation+EXIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEC523477686005EAB88 /* CLLocation+EXIF.swift */; };
+		3048CECE23477686005EAB88 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEC623477686005EAB88 /* Metadata.swift */; };
+		3048CECF23477686005EAB88 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEC623477686005EAB88 /* Metadata.swift */; };
+		3048CED023477686005EAB88 /* EXIFAuxMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEC723477686005EAB88 /* EXIFAuxMetadata.swift */; };
+		3048CED123477686005EAB88 /* EXIFAuxMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEC723477686005EAB88 /* EXIFAuxMetadata.swift */; };
+		3048CED423477686005EAB88 /* TIFFMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEC923477686005EAB88 /* TIFFMetadata.swift */; };
+		3048CED523477686005EAB88 /* TIFFMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CEC923477686005EAB88 /* TIFFMetadata.swift */; };
+		3048CED7234776C1005EAB88 /* Dictionary+Take.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CED6234776C1005EAB88 /* Dictionary+Take.swift */; };
+		3048CED8234776C1005EAB88 /* Dictionary+Take.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CED6234776C1005EAB88 /* Dictionary+Take.swift */; };
+		3048CEDA234788EC005EAB88 /* SelectionNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048CED9234788EC005EAB88 /* SelectionNotifier.swift */; };
 		307A3FEC2338EF5200CDEC21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307A3FEB2338EF5200CDEC21 /* AppDelegate.swift */; };
 		307A3FEE2338EF5200CDEC21 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307A3FED2338EF5200CDEC21 /* DocumentBrowserViewController.swift */; };
 		307A3FF02338EF5200CDEC21 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307A3FEF2338EF5200CDEC21 /* DocumentViewController.swift */; };
@@ -94,6 +108,14 @@
 		30349BFD233A616D0082FC8A /* AssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewController.swift; sourceTree = "<group>"; };
 		303DE788233FF0F300B74A80 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		303DE7D1233FFA6200B74A80 /* AssetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
+		3048CEBB23476B17005EAB88 /* HorizontalListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalListViewController.swift; sourceTree = "<group>"; };
+		3048CEC423477686005EAB88 /* EXIFMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EXIFMetadata.swift; sourceTree = "<group>"; };
+		3048CEC523477686005EAB88 /* CLLocation+EXIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocation+EXIF.swift"; sourceTree = "<group>"; };
+		3048CEC623477686005EAB88 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
+		3048CEC723477686005EAB88 /* EXIFAuxMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EXIFAuxMetadata.swift; sourceTree = "<group>"; };
+		3048CEC923477686005EAB88 /* TIFFMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TIFFMetadata.swift; sourceTree = "<group>"; };
+		3048CED6234776C1005EAB88 /* Dictionary+Take.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Take.swift"; sourceTree = "<group>"; };
+		3048CED9234788EC005EAB88 /* SelectionNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionNotifier.swift; sourceTree = "<group>"; };
 		307A3FE82338EF5200CDEC21 /* PhotoFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		307A3FEB2338EF5200CDEC21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		307A3FED2338EF5200CDEC21 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +182,7 @@
 			children = (
 				30349BFD233A616D0082FC8A /* AssetViewController.swift */,
 				309BE47F2340D91A001AC5F7 /* RepresentationViewController.swift */,
+				3048CEBB23476B17005EAB88 /* HorizontalListViewController.swift */,
 			);
 			path = ViewingAssets;
 			sourceTree = "<group>";
@@ -188,6 +211,18 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3048CEC323477686005EAB88 /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				3048CEC523477686005EAB88 /* CLLocation+EXIF.swift */,
+				3048CEC623477686005EAB88 /* Metadata.swift */,
+				3048CEC923477686005EAB88 /* TIFFMetadata.swift */,
+				3048CEC423477686005EAB88 /* EXIFMetadata.swift */,
+				3048CEC723477686005EAB88 /* EXIFAuxMetadata.swift */,
+			);
+			path = Metadata;
 			sourceTree = "<group>";
 		};
 		307A3FDF2338EF5200CDEC21 = {
@@ -245,6 +280,7 @@
 		309218C5233A0D05002A4258 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3048CED6234776C1005EAB88 /* Dictionary+Take.swift */,
 				307A401123395B7D00CDEC21 /* UIApplication+Directories.swift */,
 				309218CB233A118F002A4258 /* Data+SHA256.swift */,
 				30349BED233A3AEC0082FC8A /* CGImage+Thumbnail.swift */,
@@ -263,6 +299,7 @@
 				309218C7233A0D33002A4258 /* Asset.swift */,
 				309218C9233A0DEF002A4258 /* Representation.swift */,
 				30B77D34233E2EFA0018A043 /* Tag.swift */,
+				3048CEC323477686005EAB88 /* Metadata */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				30349BF6233A41970082FC8A /* PanDirectionGestureRecognizer.swift */,
+				3048CED9234788EC005EAB88 /* SelectionNotifier.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -439,6 +477,7 @@
 			files = (
 				307A40102339584900CDEC21 /* SceneDelegate.swift in Sources */,
 				309218C8233A0D33002A4258 /* Asset.swift in Sources */,
+				3048CECA23477686005EAB88 /* EXIFMetadata.swift in Sources */,
 				309218CC233A118F002A4258 /* Data+SHA256.swift in Sources */,
 				309218DF233A28F1002A4258 /* ImportFilesViewController.swift in Sources */,
 				30349BEC233A35C80082FC8A /* RepresentationManager.swift in Sources */,
@@ -446,7 +485,12 @@
 				30B77D35233E2EFA0018A043 /* Tag.swift in Sources */,
 				30349BF5233A40EA0082FC8A /* AssetGridCell.swift in Sources */,
 				309218CA233A0DEF002A4258 /* Representation.swift in Sources */,
+				3048CECE23477686005EAB88 /* Metadata.swift in Sources */,
+				3048CECC23477686005EAB88 /* CLLocation+EXIF.swift in Sources */,
+				3048CEDA234788EC005EAB88 /* SelectionNotifier.swift in Sources */,
 				30349BFE233A616D0082FC8A /* AssetViewController.swift in Sources */,
+				3048CEBC23476B17005EAB88 /* HorizontalListViewController.swift in Sources */,
+				3048CED023477686005EAB88 /* EXIFAuxMetadata.swift in Sources */,
 				30349BEE233A3AEC0082FC8A /* CGImage+Thumbnail.swift in Sources */,
 				307A3FF22338EF5200CDEC21 /* Document.swift in Sources */,
 				307A401223395B7D00CDEC21 /* UIApplication+Directories.swift in Sources */,
@@ -455,7 +499,9 @@
 				30E2B00E233EB0A600EB8547 /* URL+UTI.swift in Sources */,
 				303DE7D3233FFB6D00B74A80 /* AssetManager.swift in Sources */,
 				307A3FEE2338EF5200CDEC21 /* DocumentBrowserViewController.swift in Sources */,
+				3048CED423477686005EAB88 /* TIFFMetadata.swift in Sources */,
 				309BE4802340D91A001AC5F7 /* RepresentationViewController.swift in Sources */,
+				3048CED7234776C1005EAB88 /* Dictionary+Take.swift in Sources */,
 				30349BFB233A59DF0082FC8A /* AssetGridAnimator.swift in Sources */,
 				30A5870C233B6A1C00EFFF50 /* UIViewController+Child.swift in Sources */,
 				307A3FF02338EF5200CDEC21 /* DocumentViewController.swift in Sources */,
@@ -472,12 +518,18 @@
 				303DE7C1233FF64100B74A80 /* Asset.swift in Sources */,
 				303DE7C8233FF64100B74A80 /* UIView+Blur.swift in Sources */,
 				303DE7C0233FF64100B74A80 /* Document.swift in Sources */,
+				3048CED523477686005EAB88 /* TIFFMetadata.swift in Sources */,
+				3048CED8234776C1005EAB88 /* Dictionary+Take.swift in Sources */,
 				303DE7C6233FF64100B74A80 /* Data+SHA256.swift in Sources */,
 				303DE7C7233FF64100B74A80 /* CGImage+Thumbnail.swift in Sources */,
 				303DE7C3233FF64100B74A80 /* Tag.swift in Sources */,
+				3048CECD23477686005EAB88 /* CLLocation+EXIF.swift in Sources */,
 				303DE7D2233FFA6200B74A80 /* AssetManager.swift in Sources */,
+				3048CED123477686005EAB88 /* EXIFAuxMetadata.swift in Sources */,
 				303DE7C5233FF64100B74A80 /* UIApplication+Directories.swift in Sources */,
+				3048CECF23477686005EAB88 /* Metadata.swift in Sources */,
 				303DE7CA233FF64100B74A80 /* CGAffineTransform+ReadValues.swift in Sources */,
+				3048CECB23477686005EAB88 /* EXIFMetadata.swift in Sources */,
 				303DE7C2233FF64100B74A80 /* Representation.swift in Sources */,
 				303DE7CB233FF64100B74A80 /* URL+UTI.swift in Sources */,
 				303DE7C9233FF64100B74A80 /* UIViewController+Child.swift in Sources */,
@@ -631,6 +683,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LQWS3ZT7UK;
 				INFOPLIST_FILE = "PhotoFlow/Support Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -651,6 +704,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LQWS3ZT7UK;
 				INFOPLIST_FILE = "PhotoFlow/Support Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
