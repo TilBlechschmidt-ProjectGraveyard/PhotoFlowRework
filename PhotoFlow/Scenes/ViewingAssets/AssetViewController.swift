@@ -96,7 +96,7 @@ class AssetViewController: UIViewController {
         }
 
         self.data = data
-        representationViewController.image = data.image
+        representationViewController.representationData = data
 
         preloadItems()
 
@@ -147,10 +147,12 @@ class AssetViewController: UIViewController {
     }
 
     @objc func exportAsset() {
-        let url = UIApplication.documentExportCacheDirectory().appendingPathComponent("\(UUID().uuidString).jpg")
+        let url = UIApplication.documentExportCacheDirectory()
+            .appendingPathComponent("\(asset.name)-exported")
+            .appendingPathExtension(asset.fileExtension)
+        
         try! data.data.write(to: url)
 
-        // TODO Use correct UTI
         shareController = UIDocumentInteractionController(url: url)
         shareController?.uti = asset.uti
         shareController?.presentOpenInMenu(from: rightBarButtonItem, animated: false)

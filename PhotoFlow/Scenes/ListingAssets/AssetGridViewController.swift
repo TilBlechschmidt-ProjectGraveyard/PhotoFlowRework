@@ -40,19 +40,18 @@ class AssetGridViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        self.navigationController?.delegate = self
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
         
         self.selectionObserver = SelectionObserver { [unowned self] in
-            if let identifier = $0, let index = self.results.index(matching: "rawIdentifier = %@", identifier) {
-                self.collectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .centeredHorizontally)
-            } else {
-                self.collectionView.indexPathsForSelectedItems?.forEach {
-                    self.collectionView.deselectItem(at: $0, animated: true)
-                }
-            }
+            self.updateSelection(withIdentifier: $0)
         }
 
         self.notificationToken = results.observe { [unowned self] (changes: RealmCollectionChange) in
@@ -71,15 +70,27 @@ class AssetGridViewController: UICollectionViewController {
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        self.navigationController?.delegate = self
-    }
-
     func setupUI() {
         collectionView.backgroundColor = .secondarySystemBackground
         collectionView.register(AssetGridCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.contentInsetAdjustmentBehavior = .always
+    }
+    
+    func updateSelection(withIdentifier identifier: String?, animated: Bool = true) {
+        (0..<self.results.count).forEach { index in
+            let indexPath = IndexPath(item: index, section: 0)
+            let cell = self.collectionView.cellForItem(at: indexPath) as? AssetGridCell
+            cell?.shadowedImageView.imageView.tag = -1
+        }
+        
+        if let identifier = identifier, let index = self.results.index(matching: "rawIdentifier = %@", identifier) {
+            let indexPath = IndexPath(item: index, section: 0)
+            
+            let cell = self.collectionView.cellForItem(at: indexPath) as? AssetGridCell
+            cell?.shadowedImageView.imageView.tag = AssetGridAnimator.tag
+            
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: animated)
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -95,7 +106,7 @@ class AssetGridViewController: UICollectionViewController {
             cell.labelView.text = asset.name
 
             if asset.rejected {
-                cell.imagesView.alpha = 0.15
+                cell.shadowedImageView.alpha = 0.15
                 cell.iconView.image = UIImage(systemName: "xmark.circle.fill")
                 cell.iconView.tintColor = .separator
             } else if asset.accepted {
@@ -108,7 +119,7 @@ class AssetGridViewController: UICollectionViewController {
 //            DispatchQueue.global(qos: .userInitiated).async {
                 if let data = self.document.representationManager.load(representationIdentifier) {
                     DispatchQueue.main.async {
-                        cell.imageView.image = data.image
+                        cell.shadowedImageView.image = data.image
                         cell.activityIndicator.stopAnimating()
                         cell.updateImageWidth()
                         cell.gesturesEnabled = true
@@ -128,28 +139,17 @@ class AssetGridViewController: UICollectionViewController {
         return cell
     }
 
-    private var selectedFrame: CGRect?
-    private var selectedImage: UIImage?
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let asset = results[indexPath.item]
         selectionObserver?.notifier.select(asset.rawIdentifier)
-
-        // TODO Show loading indicator
-        guard let cell = collectionView.cellForItem(at: indexPath) as? AssetGridCell,
-            let thumbnailData = document.representationManager.load(asset: asset, type: .thumbnail)
-        else {
-            return
-        }
-
-        let bounds = cell.imageView.imageBoundingRect
-        selectedFrame = bounds.map { cell.imageView.convert($0, to: collectionView.superview) }
-        selectedImage = thumbnailData.image
 
         guard let assetViewController = try? AssetViewController(document: document, request: request, asset: asset) else {
             return
         }
 
         parent?.navigationController?.pushViewController(assetViewController, animated: true)
+        
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
@@ -161,14 +161,17 @@ extension AssetGridViewController: UICollectionViewDelegateFlowLayout {
 
 extension AssetGridViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let frame = self.selectedFrame else { return nil }
-        guard let image = self.selectedImage else { return nil }
+        
+        guard let imageView = collectionView.viewWithTag(AssetGridAnimator.tag) as? UIImageView, let image = imageView.image else {
+            return nil
+        }
 
+        let duration = TimeInterval(UINavigationController.hideShowBarDuration)
         switch operation {
         case .push:
-            return AssetGridAnimator(duration: TimeInterval(UINavigationController.hideShowBarDuration), isPresenting: true, originFrame: frame, image: image)
+            return AssetGridAnimator(duration: duration, isPresenting: true, image: image)
         default:
-            return AssetGridAnimator(duration: TimeInterval(UINavigationController.hideShowBarDuration), isPresenting: false, originFrame: frame, image: image)
+            return AssetGridAnimator(duration: duration, isPresenting: false, image: image)
         }
     }
 }

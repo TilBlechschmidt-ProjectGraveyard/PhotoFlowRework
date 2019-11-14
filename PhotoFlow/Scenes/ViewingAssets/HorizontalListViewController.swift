@@ -158,6 +158,7 @@ class HorizontalListViewCell: UICollectionViewCell {
     }
 
     private func setupUI() {
+        backgroundColor = .clear
         layer.borderWidth = 2
 
         imageView.layer.masksToBounds = true

@@ -17,7 +17,7 @@ class AssetGridCell: UICollectionViewCell {
     var gesturesEnabled: Bool = false
 
     let imagesView = UIView()
-    let imageView = ShadowedImageView()
+    let shadowedImageView = ShadowedImageView()
 
     let labelView = UILabel()
     let iconView = UIImageView()
@@ -44,13 +44,13 @@ class AssetGridCell: UICollectionViewCell {
         gesturesEnabled = false
 
         isHidden = false
-        imagesView.alpha = 1
+        shadowedImageView.alpha = 1
 
         iconView.image = nil
 
-        imageView.image = nil
+        shadowedImageView.image = nil
 
-        imageView.resetShadow()
+        shadowedImageView.resetShadow()
 
         labelView.text = nil
         activityIndicator.startAnimating()
@@ -67,7 +67,7 @@ class AssetGridCell: UICollectionViewCell {
     }
 
     func setupUI() {
-        addImageView(imageView)
+        addImageView(shadowedImageView)
 
         labelView.textColor = .white
         labelView.font = .preferredFont(forTextStyle: .subheadline)
@@ -139,7 +139,7 @@ class AssetGridCell: UICollectionViewCell {
     private var rightActionItemXConstraint: Constraint!
 
     func updateImageWidth() {
-        let coverImageWidth = imageView.imageBoundingRect?.size.width ?? 0
+        let coverImageWidth = shadowedImageView.imageBoundingRect?.size.width ?? 0
         let width = coverImageWidth
         let offset = width / 2.5
 

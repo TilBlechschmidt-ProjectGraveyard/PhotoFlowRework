@@ -74,7 +74,7 @@ class AssetManager {
             metadata?.exif.map { realm.add($0) }
             metadata?.aux.map { realm.add($0) }
             metadata.map { realm.add($0) }
-            realm.add(asset)
+            realm.add(asset, update: .modified)
             try self.document.representationManager.store(data, for: original.identifier)
             try self.document.representationManager.store(thumbnailData, for: thumbnail.identifier)
             try realm.commitWrite()

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreServices
 import RealmSwift
 
 enum AssetOrigin: Int {
@@ -45,6 +46,10 @@ extension Asset {
 }
 
 extension Asset {
+    var fileExtension: String {
+        return UTTypeCopyPreferredTagWithClass(uti as CFString, kUTTagClassFilenameExtension)?.takeRetainedValue() as String? ?? ".jpg"
+    }
+    
     var accepted: Bool {
         return tags.filter("rawType = \(TagType.accepted.rawValue)").count == 1
     }

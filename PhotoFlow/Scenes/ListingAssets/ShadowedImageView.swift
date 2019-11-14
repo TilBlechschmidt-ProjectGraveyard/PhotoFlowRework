@@ -15,8 +15,22 @@ class ShadowedImageView: UIView {
     let imageView = UIImageView()
 
     var image: UIImage? {
-        didSet {
-            imageView.image = image
+        get {
+            return imageView.image
+        }
+        set {
+            imageView.image = newValue
+            updateShadow()
+        }
+    }
+    
+    override var alpha: CGFloat {
+        get {
+            return imageView.alpha
+        }
+        set {
+            imageView.alpha = newValue
+            borderLayer.opacity = Float(newValue)
             updateShadow()
         }
     }
@@ -69,6 +83,7 @@ class ShadowedImageView: UIView {
 
         // Add a shadow to self
         layer.shadowPath = path.cgPath
+        layer.shadowOpacity = Float(alpha)
 
         // Add a border to self
         borderLayer.path = path.cgPath
@@ -93,28 +108,5 @@ class ShadowedImageView: UIView {
     func resetShadow() {
         layer.shadowPath = nil
         borderLayer.path = nil
-    }
-}
-
-extension UIImageView {
-    var imageBoundingRect: CGRect? {
-        if let image = self.image {
-            let boundsScale = self.bounds.size.width / self.bounds.size.height
-            let imageScale = image.size.width / image.size.height
-
-            var drawingRect: CGRect = self.bounds
-
-            if boundsScale > imageScale {
-                drawingRect.size.width =  drawingRect.size.height * imageScale
-                drawingRect.origin.x = (self.bounds.size.width - drawingRect.size.width) / 2
-            } else {
-                drawingRect.size.height = drawingRect.size.width / imageScale
-                drawingRect.origin.y = (self.bounds.size.height - drawingRect.size.height) / 2
-            }
-
-            return drawingRect
-        } else {
-            return nil
-        }
     }
 }
