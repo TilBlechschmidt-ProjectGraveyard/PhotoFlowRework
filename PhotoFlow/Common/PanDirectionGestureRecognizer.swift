@@ -47,7 +47,7 @@ class PanDirectionGestureRecognizer: UIPanGestureRecognizer {
     var onImmediateSuccessfulSwipe: ((Bool) -> Void)?
 
     @objc func handleAction(recognizer: PanDirectionGestureRecognizer) {
-        guard let view = self.view else { return }
+        guard let view = self.draggableView ?? self.view else { return }
 
         let translation = recognizer.translation(in: view)
 

@@ -8,14 +8,18 @@
 
 import Foundation
 import UIKit
+import CoreImage
+import Metal
 
 class RepresentationData {
     let data: Data
     let image: UIImage?
+    let rendererData: ImageRendererData?
 
-    init(_ data: Data) {
+    init(_ data: Data, context: CIContext, device: MTLDevice, initializeRenderer: Bool) {
         self.data = data
         image = UIImage(data: data)
+        rendererData = initializeRenderer ? ImageRendererData(data: data, device: device) : nil // , context: context
     }
 
     func image(scaledBy scale: Double) -> UIImage? {
@@ -41,14 +45,23 @@ struct CachedRepresentationData {
 
 enum RepresentationManagerError: Error {
     case representationExists
+    case noRenderingDeviceAvailable
 }
 
 class RepresentationManager {
     private var cache: [String: CachedRepresentationData] = [:]
     private unowned let document: Document
+    private let context: CIContext
+    private let device: MTLDevice
 
-    init(document: Document) {
+    init(document: Document, context: CIContext = CIContext(), device: MTLDevice? = nil) throws {
+        guard let device = device ?? MTLCreateSystemDefaultDevice() else {
+            throw RepresentationManagerError.noRenderingDeviceAvailable
+        }
+        
         self.document = document
+        self.context = context
+        self.device = device
     }
 
     private var storageURL: URL {
@@ -67,13 +80,25 @@ class RepresentationManager {
         }
     }
 
-    func load(_ identifier: String, useCache: Bool = true) -> RepresentationData? {
+    func representationID(for asset: Asset, type: RepresentationType) -> String? {
+        let representation = asset.representations.filter("rawType = \(type.rawValue)").first
+        return representation?.identifier
+    }
+
+    func load(asset: Asset, type: RepresentationType, useCache: Bool = true) -> RepresentationData? {
+        return representationID(for: asset, type: type).flatMap {
+            return document.representationManager.load($0, initializeRenderer: type == .original)
+        }
+    }
+
+    func load(_ identifier: String, initializeRenderer: Bool = false, useCache: Bool = true) -> RepresentationData? {
         let url = storageURL.appendingPathComponent(identifier)
 
         if let data = cache[identifier]?.representationData {
             return data
         } else if let data = try? Data(contentsOf: url) {
-            let representationData = RepresentationData(data)
+            let context = CIContext()
+            let representationData = RepresentationData(data, context: context, device: device, initializeRenderer: initializeRenderer)
             if useCache {
                 cache[identifier] = CachedRepresentationData(representationData: representationData)
             }
@@ -81,11 +106,6 @@ class RepresentationManager {
         } else {
             return nil
         }
-    }
-
-    func load(asset: Asset, type: RepresentationType, useCache: Bool = true) -> RepresentationData? {
-        let representation = asset.representations.filter("rawType = \(type.rawValue)").first
-        return representation.flatMap { document.representationManager.load($0.identifier) }
     }
 }
 

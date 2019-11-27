@@ -103,21 +103,36 @@ class AssetViewController: UIViewController {
         title = asset.name
     }
 
-    private func preloadItem(at index: Int) {
-        if let data = document.representationManager.load(asset: results[index], type: .original) {
-            preloadedItems.append(data)
-        }
+    private func preloadItem(with id: String) {
+        // TODO This causes a lot of issues
+//        if let data = document.representationManager.load(id) {
+//            preloadedItems.append(data)
+//        }
     }
 
     private func preloadItems() {
-        preloadedItems.removeAll(keepingCapacity: true)
-
-        if let previousIndex = indexChanged(by: -1) {
-            preloadItem(at: previousIndex)
+        
+        let previousID = indexChanged(by: -1).flatMap {
+            return document.representationManager.representationID(for: results[$0], type: .original)
         }
+        
+        let nextID = indexChanged(by: 1).flatMap {
+            return document.representationManager.representationID(for: results[$0], type: .original)
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            // Remove all items but keep them in memory until the next caching has been completed
+            var cacheClear = self.preloadedItems
+            defer { cacheClear.removeAll() }
+            self.preloadedItems.removeAll(keepingCapacity: true)
 
-        if let nextIndex = indexChanged(by: 1) {
-            preloadItem(at: nextIndex)
+            if let previousID = previousID {
+                self.preloadItem(with: previousID)
+            }
+
+            if let nextID = nextID {
+                self.preloadItem(with: nextID)
+            }
         }
     }
 

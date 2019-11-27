@@ -13,7 +13,9 @@ protocol ImageBoundingRectReadableView: UIView {
 }
 
 class ImageBoundingView: UIView, ImageBoundingRectReadableView {
-    var imageBoundingRect: CGRect? = nil
+    var imageBoundingRect: CGRect? {
+        return self.frame
+    }
 }
 
 extension UIImageView: ImageBoundingRectReadableView {
