@@ -3,31 +3,4 @@
    uuid = "3E022189-CC0A-4062-AE8A-E88CDC8C49B0"
    type = "1"
    version = "2.0">
-   <Breakpoints>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D1FF077D-D027-4041-BFE5-5E11F1F70C06"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            condition = "initializeRenderer"
-            continueAfterRunningActions = "Yes"
-            filePath = "PhotoFlow-Common/Managers/RepresentationManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "init(_:context:device:initializeRenderer:)"
-            landmarkType = "7">
-            <Actions>
-               <BreakpointActionProxy
-                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
-                  <ActionContent
-                     consoleCommand = "p &quot;Initializing renderer for \(data.count) bytes&quot;">
-                  </ActionContent>
-               </BreakpointActionProxy>
-            </Actions>
-         </BreakpointContent>
-      </BreakpointProxy>
-   </Breakpoints>
 </Bucket>

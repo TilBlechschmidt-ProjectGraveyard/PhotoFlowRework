@@ -32,8 +32,6 @@ class ShareViewController: UIViewController {
                 return
             }
 
-            print(self.imageURLs.count)
-
             DispatchQueue.main.async {
                 self.present(self.documentPickerVC, animated: true, completion: nil)
             }

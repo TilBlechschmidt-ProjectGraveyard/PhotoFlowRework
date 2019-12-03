@@ -12,7 +12,7 @@ class SelectionObserver {
     let closure: (_ identifier: String?) -> Void
     let notifier: SelectionNotifier
     
-    init(notifier: SelectionNotifier = SelectionNotifier.shared, closure: @escaping (String?) -> Void) {
+    init(notifier: SelectionNotifier, closure: @escaping (String?) -> Void) {
         self.notifier = notifier
         self.closure = closure
         NotificationCenter.default.addObserver(self, selector: #selector(notify), name: .didUpdateSelection, object: notifier)
@@ -30,13 +30,17 @@ class SelectionObserver {
 }
 
 class SelectionNotifier {
-    static let shared = SelectionNotifier()
-    
     var selectionIdentifier: String? = nil
+    var previousIdentifier: String? = nil
     
     func select(_ identifier: String?) {
+        previousIdentifier = selectionIdentifier
         selectionIdentifier = identifier
         NotificationCenter.default.post(name: .didUpdateSelection, object: self)
+    }
+    
+    func observe(closure: @escaping (String?) -> Void) -> SelectionObserver {
+        return SelectionObserver(notifier: self, closure: closure)
     }
 }
 

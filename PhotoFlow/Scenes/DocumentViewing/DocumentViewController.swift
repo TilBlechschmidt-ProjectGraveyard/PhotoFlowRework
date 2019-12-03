@@ -11,6 +11,7 @@ import SnapKit
 
 class DocumentViewController: UIViewController {
     private let document: Document
+    private let selectionNotifier: SelectionNotifier
 
     override var navigationItem: UINavigationItem {
         let item = super.navigationItem
@@ -24,8 +25,9 @@ class DocumentViewController: UIViewController {
         return item
     }
 
-    init(document: Document) {
+    init(document: Document, notifier: SelectionNotifier) {
         self.document = document
+        self.selectionNotifier = notifier
         super.init(nibName: nil, bundle: nil)
         self.title = document.title
     }
@@ -37,7 +39,7 @@ class DocumentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let gridViewController = try! AssetGridViewController(document: document)
+        let gridViewController = try! AssetGridViewController(document: document, notifier: selectionNotifier)
         add(gridViewController)
 
         gridViewController.view.snp.makeConstraints { make in

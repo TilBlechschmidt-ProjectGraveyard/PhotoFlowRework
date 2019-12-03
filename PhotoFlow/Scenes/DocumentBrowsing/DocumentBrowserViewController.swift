@@ -10,6 +10,16 @@ import UIKit
 import SwiftUI
 
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
+    private let selectionNotifier: SelectionNotifier
+    
+    init(notifier: SelectionNotifier) {
+        self.selectionNotifier = notifier
+        super.init(forOpeningFilesWithContentTypes: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +95,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         // Access the document
         document.open(completionHandler: { success in
             if success {
-                let documentViewController = DocumentViewController(document: document)
+                let documentViewController = DocumentViewController(document: document, notifier: self.selectionNotifier)
                 let navigationController = UINavigationController(rootViewController: documentViewController)
                 navigationController.modalPresentationStyle = .currentContext
                 self.present(navigationController, animated: true, completion: nil)

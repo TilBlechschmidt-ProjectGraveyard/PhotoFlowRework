@@ -15,14 +15,19 @@ class AssetGridViewController: UICollectionViewController {
     private let request: AssetRequest
     private let results: Results<Asset>
     private var notificationToken: NotificationToken?
+    private let selectionNotifier: SelectionNotifier
     private var selectionObserver: SelectionObserver?
+    
+    private let backgroundView = EmptyGridViewBackground()
 
-    init(document: Document, request: AssetRequest = AssetRequest()) throws {
+    init(document: Document, request: AssetRequest = AssetRequest(), notifier: SelectionNotifier) throws {
         self.document = document
         self.realm = try document.createRealm()
 
         self.request = request
         self.results = request.execute(on: realm)
+        
+        self.selectionNotifier = notifier
 
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
@@ -50,7 +55,7 @@ class AssetGridViewController: UICollectionViewController {
 
         setupUI()
         
-        self.selectionObserver = SelectionObserver { [unowned self] in
+        self.selectionObserver = selectionNotifier.observe { [unowned self] in
             self.updateSelection(withIdentifier: $0)
         }
 
@@ -67,6 +72,8 @@ class AssetGridViewController: UICollectionViewController {
             case .error(let err):
                 fatalError("\(err)")
             }
+            
+            self.backgroundView.isHidden = !self.results.isEmpty
         }
     }
 
@@ -74,6 +81,15 @@ class AssetGridViewController: UICollectionViewController {
         collectionView.backgroundColor = .secondarySystemBackground
         collectionView.register(AssetGridCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.contentInsetAdjustmentBehavior = .always
+        
+        view.addSubview(backgroundView)
+        backgroundView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalTo(150)
+            make.height.equalTo(200)
+        }
+        
+        backgroundView.isHidden = !results.isEmpty
     }
     
     func updateSelection(withIdentifier identifier: String?, animated: Bool = true) {
@@ -143,7 +159,7 @@ class AssetGridViewController: UICollectionViewController {
         let asset = results[indexPath.item]
         selectionObserver?.notifier.select(asset.rawIdentifier)
 
-        guard let assetViewController = try? AssetViewController(document: document, request: request, asset: asset) else {
+        guard let assetViewController = try? AssetViewController(document: document, notifier: selectionNotifier, request: request, asset: asset) else {
             return
         }
 

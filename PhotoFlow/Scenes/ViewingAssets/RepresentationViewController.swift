@@ -78,7 +78,7 @@ class RepresentationViewController: UIViewController {
         // Image View
         imageBoundsView.tag = AssetGridAnimator.tag
         view.addSubview(imageBoundsView)
-        // Will be placed by ImageRendererView
+        // Will be placed by ImageRendererView (bad practice ... change that)
 
         // Next / Prev arrows
         nextImageView.tintColor = .white

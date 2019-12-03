@@ -15,14 +15,25 @@ class HorizontalListViewController: UICollectionViewController {
     private let request: AssetRequest
     private let results: Results<Asset>
     private var notificationToken: NotificationToken?
+    private let selectionNotifier: SelectionNotifier
     private var selectionObserver: SelectionObserver?
     
-    init(document: Document, request: AssetRequest = AssetRequest()) throws {
+    var selectedIndexPath: IndexPath? {
+        guard let selectionIdentifier = selectionNotifier.selectionIdentifier else {
+            return nil
+        }
+        
+        return self.indexPath(for: selectionIdentifier)
+    }
+    
+    init(document: Document, request: AssetRequest = AssetRequest(), notifier: SelectionNotifier) throws {
         self.document = document
         self.realm = try document.createRealm()
 
         self.request = request
         self.results = request.execute(on: realm)
+        
+        self.selectionNotifier = notifier
             
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -42,16 +53,26 @@ class HorizontalListViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func refreshSelection() {
-        self.refreshSelection(of: selectionObserver?.notifier.selectionIdentifier)
+    private func indexPath(for identifier: String) -> IndexPath? {
+        let index = self.results.index(matching: "rawIdentifier = %@", identifier)
+        return index.map { IndexPath(item: $0, section: 0) }
     }
     
-    private func refreshSelection(of identifier: String?) {
-        if let identifier = identifier, let index = self.results.index(matching: "rawIdentifier = %@", identifier) {
-            self.collectionView.selectItem(at: IndexPath(item: index, section: 0), animated: true, scrollPosition: .centeredHorizontally)
-        } else {
-            self.collectionView.indexPathsForSelectedItems?.forEach {
-                self.collectionView.deselectItem(at: $0, animated: true)
+    private func refreshSelection() {
+        if let previous = selectionNotifier.previousIdentifier, let indexPath = indexPath(for: previous) {
+            let cell = collectionView.cellForItem(at: indexPath) as? HorizontalListViewCell
+            cell?.borderShown = false
+        }
+        
+        if let selected = selectionNotifier.selectionIdentifier, let indexPath = indexPath(for: selected) {
+            let cell = collectionView.cellForItem(at: indexPath) as? HorizontalListViewCell
+            cell?.borderShown = true
+            
+            if cell == nil, let lastVisiblePath = collectionView.indexPathsForVisibleItems.last {
+                let isRightOutOfView = lastVisiblePath < indexPath
+                collectionView.scrollToItem(at: indexPath, at: isRightOutOfView ? .right : .left, animated: true)
+                // TODO Selection border isn't showing properly and this is a dirty workaround
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: refreshSelection)
             }
         }
     }
@@ -59,10 +80,10 @@ class HorizontalListViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .systemBackground
         
-        self.selectionObserver = SelectionObserver { [unowned self] in
-            self.refreshSelection(of: $0)
+        self.selectionObserver = selectionNotifier.observe { [unowned self] _ in
+            self.refreshSelection()
         }
         
         self.notificationToken = results.observe { [unowned self] (changes: RealmCollectionChange) in
@@ -81,13 +102,17 @@ class HorizontalListViewController: UICollectionViewController {
             }
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         refreshSelection()
+        
+        selectedIndexPath.map {
+            collectionView.scrollToItem(at: $0, at: .centeredHorizontally, animated: false)
+        }
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return results.count
     }
@@ -97,8 +122,10 @@ class HorizontalListViewController: UICollectionViewController {
         let asset = results[indexPath.item]
 
         if let cell = cell as? HorizontalListViewCell, let representation = asset.representations.filter("rawType = 1").first {
-            cell.isSelected = false
-            
+            if selectedIndexPath == indexPath {
+                cell.borderShown = true
+            }
+
             if let data = self.document.representationManager.load(representation.identifier) {
                 cell.loadImage(image: data.image, asset: asset)
             }
@@ -115,7 +142,11 @@ class HorizontalListViewController: UICollectionViewController {
 
 extension HorizontalListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -137,9 +168,9 @@ class HorizontalListViewCell: UICollectionViewCell {
     private let acceptedIcon = UIImageView(image: UIImage(systemName: "checkmark.circle.fill"))
     private let rejectedIcon = UIImageView(image: UIImage(systemName: "xmark.circle.fill"))
 
-    override var isSelected: Bool {
+    fileprivate var borderShown: Bool = false {
         didSet {
-            layer.borderColor = isSelected ? UIColor.white.cgColor : UIColor.clear.cgColor
+            layer.borderColor = borderShown ? UIColor.systemBlue.cgColor : UIColor.clear.cgColor
         }
     }
 
@@ -155,11 +186,13 @@ class HorizontalListViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.activityIndicator.startAnimating()
+        borderShown = false
     }
 
     private func setupUI() {
-        backgroundColor = .clear
-        layer.borderWidth = 2
+        backgroundColor = .systemGray5
+        layer.borderWidth = 3
+        layer.borderColor = UIColor.clear.cgColor
 
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFit

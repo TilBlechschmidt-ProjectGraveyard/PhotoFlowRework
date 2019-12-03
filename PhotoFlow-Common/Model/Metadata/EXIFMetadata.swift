@@ -29,6 +29,7 @@ enum ColorSpace: Int {
     case uncalibrated = 65535
 }
 
+@objcMembers
 class EXIFMetadata: Object {
     // Other possibly interesting values: ApertureValue/MaxApertureValue, Flash, FocalPlane*, PixelXDimension, PixelYDimension, MeteringMode
 

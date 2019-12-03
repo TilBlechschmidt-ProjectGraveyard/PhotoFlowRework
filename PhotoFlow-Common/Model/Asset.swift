@@ -50,6 +50,10 @@ extension Asset {
         return UTTypeCopyPreferredTagWithClass(uti as CFString, kUTTagClassFilenameExtension)?.takeRetainedValue() as String? ?? ".jpg"
     }
     
+    var humanReadableUTI: String? {
+        return UTTypeCopyDescription(uti as CFString)?.takeRetainedValue() as String?
+    }
+    
     var accepted: Bool {
         return tags.filter("rawType = \(TagType.accepted.rawValue)").count == 1
     }

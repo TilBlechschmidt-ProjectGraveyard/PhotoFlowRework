@@ -13,9 +13,9 @@ import Metal
 struct ImageRendererData {
     let device: MTLDevice
     let texture: MTLTexture
-    
+
     init(data: Data, device: MTLDevice) {
         self.device = device
-        self.texture = try! device.makeTexture(from: data)
+        self.texture = device.makeTexture(from: data)!
     }
 }
